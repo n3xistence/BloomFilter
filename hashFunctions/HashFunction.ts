@@ -1,3 +1,3 @@
 export interface HashFunction{
-  hash(n: number): number;
+  hash(n: number, len: number): number;
 }

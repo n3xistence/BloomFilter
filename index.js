@@ -12,7 +12,16 @@ let hashFuncs = [
     new maddHashFunction_1.maddHashFunction(),
     new squareHashFunction_1.squareHashFunction()
 ];
-let filter = new BloomFilter_1.default(20, hashFuncs);
-filter.insert(23);
-console.log(filter.toString());
-console.log(filter.contains(2));
+let filter = new BloomFilter_1.default(50, hashFuncs);
+let then = performance.now();
+for (let i = 0; i < 1000000; i++) {
+    filter.insert(Math.round(Math.random() * 100));
+}
+let now = performance.now();
+console.log(`Insert Took ${now - then}ms to Compile.`);
+then = now;
+for (let i = 0; i < 1000000; i++) {
+    filter.contains(Math.round(Math.random() * 100));
+}
+now = performance.now();
+console.log(`Search Took ${now - then}ms to Compile.`);

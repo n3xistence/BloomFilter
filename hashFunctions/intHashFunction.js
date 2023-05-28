@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.intHashFunction = void 0;
 class intHashFunction {
-    hash(n) {
-        return (n * 4) % 5;
+    hash(n, len) {
+        return (n * 7) % len;
     }
 }
 exports.intHashFunction = intHashFunction;

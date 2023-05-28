@@ -17,7 +17,8 @@ class BloomFilter {
     getHashes(value) {
         let hashes = [];
         for (let hashFunc of this.hashFunctions) {
-            hashes.push(hashFunc.hash(value));
+            let hashValue = (hashFunc.hash(value, this.list.length));
+            hashes.push(hashValue);
         }
         return hashes;
     }
@@ -36,8 +37,13 @@ class BloomFilter {
             this.set(hash, 1);
         }
     }
+    clear() {
+        for (let i = 0; i < this.list.length; i++) {
+            this.list[i] = 0;
+        }
+    }
     toString() {
-        return this.list.map(e => `<${e}>`).join(", ");
+        return this.list.map(e => e == 1 ? `<\x1b[43m${e}\x1b[0m>` : `<${e}>`).join(", ");
     }
 }
 exports.default = BloomFilter;
