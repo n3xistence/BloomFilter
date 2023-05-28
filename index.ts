@@ -11,13 +11,13 @@ let hashFuncs: HashFunction[] = [
   new squareHashFunction()
 ]
 
-let filter: BloomFilter = new BloomFilter(50, hashFuncs);
+let filter: BloomFilter = new BloomFilter(50_000, hashFuncs);
 
 
 let then = performance.now();
 
 for (let i = 0;i < 1_000_000;i++){
-  filter.insert(Math.round(Math.random() * 100));
+  filter.insert(Math.round(Math.random() * 100_000));
 }
 
 let now = performance.now();
@@ -27,7 +27,10 @@ console.log(`Insert Took ${now - then}ms to Compile.`)
 then = now;
 
 for (let i = 0;i < 1_000_000;i++){
-  filter.contains(Math.round(Math.random() * 100));
+  let val: number = Math.round(Math.random() * 100_000);
+  let contains: boolean = filter.contains(val);
+
+  console.log(`List ${contains ? "contains" : "does not contain"} ${val}`)
 }
 
 now = performance.now();
