@@ -37,3 +37,5 @@ now = performance.now();
 
 
 console.log(`Search Took ${now - then}ms to Compile.`)
+
+console.log(filter.toString());

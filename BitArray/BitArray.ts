@@ -21,7 +21,7 @@ class BitArray {
     return this.list.length;
   }
 
-  map(func: any): string[] {
+  map(func: (value: number) => any): any[] {
     return this.list.map(func);
   }
 }
