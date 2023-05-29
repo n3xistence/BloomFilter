@@ -12,7 +12,19 @@ let hashFuncs = [
     new maddHashFunction_1.maddHashFunction(),
     new squareHashFunction_1.squareHashFunction()
 ];
-let filter = new BloomFilter_1.default(20, hashFuncs);
-filter.insert(23);
+let filter = new BloomFilter_1.default(50000, hashFuncs);
+let then = performance.now();
+for (let i = 0; i < 1000000; i++) {
+    filter.insert(Math.round(Math.random() * 100000));
+}
+let now = performance.now();
+console.log(`Insert Took ${now - then}ms to Compile.`);
+then = now;
+for (let i = 0; i < 1000000; i++) {
+    let val = Math.round(Math.random() * 100000);
+    let contains = filter.contains(val);
+    // console.log(`List ${contains ? "contains" : "does not contain"} ${val}`)
+}
+now = performance.now();
+console.log(`Search Took ${now - then}ms to Compile.`);
 console.log(filter.toString());
-console.log(filter.contains(2));

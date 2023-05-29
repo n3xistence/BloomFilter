@@ -11,10 +11,29 @@ let hashFuncs: HashFunction[] = [
   new squareHashFunction()
 ]
 
-let filter: BloomFilter = new BloomFilter(20, hashFuncs);
+let filter: BloomFilter = new BloomFilter(50_000, hashFuncs);
 
-filter.insert(23);
 
-console.log(filter.toString());
+let then = performance.now();
 
-console.log(filter.contains(2));
+for (let i = 0;i < 1_000_000;i++){
+  filter.insert(Math.round(Math.random() * 100_000));
+}
+
+let now = performance.now();
+
+
+console.log(`Insert Took ${now - then}ms to Compile.`)
+then = now;
+
+for (let i = 0;i < 1_000_000;i++){
+  let val: number = Math.round(Math.random() * 100_000);
+  let contains: boolean = filter.contains(val);
+
+  // console.log(`List ${contains ? "contains" : "does not contain"} ${val}`)
+}
+
+now = performance.now();
+
+
+console.log(`Search Took ${now - then}ms to Compile.`)

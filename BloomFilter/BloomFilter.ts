@@ -26,7 +26,7 @@ class BloomFilter{
   private getHashes(value: number): number[] {
     let hashes: number[] = [];
     for (let hashFunc of this.hashFunctions){
-      hashes.push(hashFunc.hash(value));
+      hashes.push(hashFunc.hash(value, this.list.size()));
     }
     return hashes;
   }

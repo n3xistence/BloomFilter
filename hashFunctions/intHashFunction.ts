@@ -1,7 +1,7 @@
 import { HashFunction } from "./HashFunction";
 
 export class intHashFunction implements HashFunction{
-  hash(n: number):number {
-    return (n * 4) % 5;
+  hash(n: number, len: number):number {
+    return (n * 7) % len;
   }
 }
