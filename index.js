@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const BloomFilter_1 = __importDefault(require("./BloomFilter"));
+const BloomFilter_1 = __importDefault(require("./BloomFilter/BloomFilter"));
 const intHashFunction_1 = require("./hashFunctions/intHashFunction");
 const maddHashFunction_1 = require("./hashFunctions/maddHashFunction");
 const squareHashFunction_1 = require("./hashFunctions/squareHashFunction");

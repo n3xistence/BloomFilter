@@ -1,25 +1,26 @@
-import { HashFunction } from "./hashFunctions/HashFunction";
+import { HashFunction } from "../hashFunctions/HashFunction";
+import BitArray  from "../BitArray/BitArray"
 
 class BloomFilter{
-  list: number[];
+  list: BitArray;
   hashFunctions: HashFunction[];
 
   constructor(len: number, hashFunctions: HashFunction[]) {
     this.hashFunctions = hashFunctions;
 
-    this.list = [];
+    this.list = new BitArray(len);
 
     for (let i = 0;i < len;i++){
-      this.list.push(0);
+      this.list.set(i, 0);
     }
   }
 
   set(index: number, value: number): void {
-    this.list[index] = value;
+    this.list.set(index, value);
   }
 
   get(index: number): number{
-    return this.list[index];
+    return this.list.at(index);
   }
 
   private getHashes(value: number): number[] {
@@ -34,7 +35,7 @@ class BloomFilter{
     let hashes: number[] = this.getHashes(value);
 
     for (let hash of hashes){
-      if (this.list[hash] === 1) continue;
+      if (this.list.at(hash) === 1) continue;
 
       return false;
     }
@@ -51,7 +52,7 @@ class BloomFilter{
   }
 
   toString(): string {
-    return this.list.map(e => `<${e}>`).join(", ")
+    return this.list.map((e: number) => `<${e}>`).join(", ")
   }
 }
 

@@ -1,18 +1,22 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const BitArray_1 = __importDefault(require("../BitArray/BitArray"));
 class BloomFilter {
     constructor(len, hashFunctions) {
         this.hashFunctions = hashFunctions;
-        this.list = [];
+        this.list = new BitArray_1.default(len);
         for (let i = 0; i < len; i++) {
-            this.list.push(0);
+            this.list.set(i, 0);
         }
     }
     set(index, value) {
-        this.list[index] = value;
+        this.list.set(index, value);
     }
     get(index) {
-        return this.list[index];
+        return this.list.at(index);
     }
     getHashes(value) {
         let hashes = [];
@@ -24,7 +28,7 @@ class BloomFilter {
     contains(value) {
         let hashes = this.getHashes(value);
         for (let hash of hashes) {
-            if (this.list[hash] === 1)
+            if (this.list.at(hash) === 1)
                 continue;
             return false;
         }
@@ -37,7 +41,7 @@ class BloomFilter {
         }
     }
     toString() {
-        return this.list.map(e => `<${e}>`).join(", ");
+        return this.list.map((e) => `<${e}>`).join(", ");
     }
 }
 exports.default = BloomFilter;

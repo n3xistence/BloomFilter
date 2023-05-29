@@ -1,4 +1,4 @@
-import BloomFilter  from "./BloomFilter";
+import BloomFilter  from "./BloomFilter/BloomFilter";
 
 import { HashFunction } from "./hashFunctions/HashFunction";
 import { intHashFunction } from "./hashFunctions/intHashFunction";
